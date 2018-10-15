@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <script src="3_socket.js"></script> -->
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="4_websocket.js"/>
+    <title>Document</title>
+    <script type="text/javascript">
+    var socket;
+    function onload(){
+        socket=io.connect();
+        socket.on('timer',function(data){
+            document.getElementById("timer").innerHTML=data;
+        });
+
+    };
+    function sumbitData(){
+        var data=document.getElementById("inputdata").value;
+        socket.emit('submit',data);
+    }
+    </script>
+</head>
+<body onload="onload()">
+    <h1>Sample websocket page</h1>
+    <p>Timer: <span id="timer"></span></p>
+    <form action="#">
+        <p>Data : <input type="text" id="inputdata"/>
+            <br>  <br>  
+            <input type="button" value="Button" onClick="sumbitData()">
+        </p>
+    </form>
+</body>
+</html>
